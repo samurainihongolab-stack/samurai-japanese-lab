@@ -8,95 +8,197 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* 1. Header/Navigation */}
+      {/* Header/Navigation - 拡張版 */}
       <header className="sticky top-0 z-50 bg-samurai-navy text-white shadow-md">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
-            <div className="text-2xl font-bold">🥋 侍日本語ラボ</div>
+            <div className="text-2xl font-bold flex items-center gap-2">
+              <span>🥋</span>
+              <span>侍日本語ラボ</span>
+            </div>
             <nav className="hidden sm:flex gap-8 text-sm">
-              <a href="#about" className="hover:text-samurai-gold transition">
-                About
-              </a>
-              <a href="#problem" className="hover:text-samurai-gold transition">
-                Daily問題
+              <a href="#home" className="hover:text-samurai-gold transition">
+                ホーム
               </a>
               <a href="#books" className="hover:text-samurai-gold transition">
-                書籍
+                書籍シリーズ
               </a>
-              <a href="#sns" className="hover:text-samurai-gold transition">
-                SNS
+              <a href="#guides" className="hover:text-samurai-gold transition">
+                学習ガイド
               </a>
-              <a href="#contact" className="hover:text-samurai-gold transition">
-                Contact
+              <a href="#blog" className="hover:text-samurai-gold transition">
+                ブログ
+              </a>
+              <a href="#about" className="hover:text-samurai-gold transition">
+                選書について
               </a>
             </nav>
-          </div>
-        </div>
-      </header>
-
-      {/* 2. Hero Section */}
-      <section className="bg-gradient-to-b from-samurai-light to-white py-16 sm:py-24">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <div className="text-5xl sm:text-6xl font-bold mb-6">
-              <span className="text-samurai-navy">失敗させない</span>
-              <br />
-              <span className="text-samurai-gold">日本語学習へ。</span>
-            </div>
-            <p className="text-lg sm:text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
-              日本語教員試験対策から登録日本語教員まで。<br />
-              皆さんの背中を後押しします。
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex items-center gap-4">
+              <button className="text-white hover:text-samurai-gold">🔍</button>
               <a
                 href={amazonLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block bg-samurai-red text-white px-8 py-3 rounded-lg font-bold hover:opacity-90 transition"
+                className="bg-samurai-gold text-black px-4 py-2 rounded-lg font-bold hover:opacity-90 transition text-sm"
               >
-                📚 書籍を見る
-              </a>
-              <a
-                href="#sns"
-                className="inline-block bg-samurai-navy text-white px-8 py-3 rounded-lg font-bold hover:opacity-90 transition"
-              >
-                SNSをフォロー
+                🛒 Amazonで購入
               </a>
             </div>
           </div>
         </div>
+      </header>
+
+      {/* Hero Section - 新デザイン（キャラクター・背景イラスト対応） */}
+      <section className="relative bg-gradient-to-br from-samurai-navy via-blue-700 to-samurai-navy overflow-hidden">
+        {/* 背景パターン（波・桜モチーフ） */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-samurai-gold to-transparent rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-400 to-transparent rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-32">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            {/* 左側：テキストコンテンツ */}
+            <div className="text-white">
+              <div className="mb-4 inline-block bg-samurai-gold text-black px-4 py-2 rounded-full font-bold text-sm">
+                登録日本語教員試験対策
+              </div>
+              <h1 className="text-5xl sm:text-6xl font-bold mb-6">
+                <span className="block text-white">侍</span>
+                <span className="block text-5xl sm:text-5xl">日本語ラボ</span>
+              </h1>
+              <p className="text-xl text-blue-100 mb-8 leading-relaxed max-w-lg">
+                日本語教の学びを、<br />
+                もっと分かりやすく、もっと実践的に。
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href="#books"
+                  className="inline-block bg-samurai-gold text-black px-8 py-3 rounded-lg font-bold hover:opacity-90 transition text-center"
+                >
+                  書籍シリーズを見る
+                </a>
+                <a
+                  href="#guides"
+                  className="inline-block bg-blue-500 text-white px-8 py-3 rounded-lg font-bold hover:opacity-90 transition text-center"
+                >
+                  学習ガイド
+                </a>
+              </div>
+            </div>
+
+            {/* 右側：プレースホルダー（キャラクター画像エリア） */}
+            <div className="relative h-96 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center border-4 border-samurai-gold">
+              <div className="text-center text-white opacity-75">
+                <p className="text-2xl mb-2">🎨 キャラクター</p>
+                <p className="text-sm">侍・主人公・さくら先生</p>
+                <p className="text-xs mt-2">（画像統合予定）</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 下部の波パターン */}
+        <div className="absolute bottom-0 left-0 right-0 h-20 bg-white opacity-10 transform -skew-y-2"></div>
       </section>
 
-      {/* 3. About Section */}
-      <section id="about" className="py-16 sm:py-24 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-samurai-navy mb-12 text-center">
-            About 侍日本語ラボ
-          </h2>
-          <div className="grid md:grid-cols-2 gap-12">
-            <div>
-              <h3 className="text-2xl font-bold text-samurai-gold mb-4">
-                ミッション
-              </h3>
-              <p className="text-gray-700 leading-8">
-                書籍とSNS、アプリを通じて、日本語学習者が「失敗させない」学習環境を提供します。
-              </p>
-            </div>
-            <div>
-              <h3 className="text-2xl font-bold text-samurai-gold mb-4">
-                コンセプト
-              </h3>
-              <p className="text-gray-700 leading-8">
-                背中を後押し。これからの日本語教員も、既に登録された日本語教員も。
-                情報発信で、一緒に成長しましょう。
-              </p>
-            </div>
+      {/* 4つの特徴セクション */}
+      <section className="py-16 sm:py-24 bg-gradient-to-b from-white to-blue-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { icon: "📖", title: "試験に直結する実践的問題", desc: "最新の試験傾向を反映" },
+              { icon: "🎯", title: "基礎から応用まで体系的に学ぶ", desc: "段階的な学習ロードマップ" },
+              { icon: "📅", title: "スケジュールで計画的に学習", desc: "1日30分で着実に進める" },
+              { icon: "📊", title: "合格力を効果的にアップ", desc: "データ化された進捗管理" }
+            ].map((item, idx) => (
+              <div key={idx} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition text-center">
+                <div className="text-4xl mb-3">{item.icon}</div>
+                <h3 className="font-bold text-samurai-navy mb-2">{item.title}</h3>
+                <p className="text-sm text-gray-600">{item.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 4. Daily Problem Section */}
-      <section id="problem" className="py-16 sm:py-24 bg-samurai-light">
+      {/* 書籍シリーズセクション */}
+      <section id="books" className="py-16 sm:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl sm:text-5xl font-bold text-samurai-navy mb-4">
+              📚 書籍シリーズ | 侍の学び三部作
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">基礎から応用まで、体系的に学べる教材</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "壱ノ巻",
+                subtitle: "応用試験・読解",
+                badge: "販売中",
+                badgeColor: "bg-samurai-gold",
+                features: ["✓ CBT対応", "✓ 本番レベルの模試試験", "✓ 詳しい解説つき"],
+                icon: "🌊",
+                status: "published"
+              },
+              {
+                title: "弐ノ巻",
+                subtitle: "基礎+応用",
+                badge: "企画中",
+                badgeColor: "bg-green-600",
+                features: ["✓ 基礎から応用まで網羅", "✓ 頻出テーマで体系整理", "✓ 演習問題で定着"],
+                icon: "🍃",
+                status: "coming"
+              },
+              {
+                title: "参ノ巻",
+                subtitle: "60日で合格カップ",
+                badge: "企画中",
+                badgeColor: "bg-orange-600",
+                features: ["✓ 60日の学習プラン", "✓ 重要ポイントの解説", "✓ 実績・機械問題つき"],
+                icon: "🍂",
+                status: "coming"
+              }
+            ].map((book, idx) => (
+              <div key={idx} className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition">
+                <div className="bg-gradient-to-r from-samurai-navy to-blue-700 text-white p-6 relative">
+                  <span className={`${book.badgeColor} text-white text-xs font-bold px-3 py-1 rounded-full absolute top-4 right-4`}>
+                    {book.badge}
+                  </span>
+                  <div className="text-6xl mb-4">{book.icon}</div>
+                  <h3 className="text-2xl font-bold">{book.title}</h3>
+                  <p className="text-blue-100 text-sm">{book.subtitle}</p>
+                </div>
+                <div className="p-6">
+                  {book.features.map((feature, fidx) => (
+                    <p key={fidx} className="text-sm text-gray-700 mb-2">{feature}</p>
+                  ))}
+                  {book.status === "published" && (
+                    <a
+                      href={amazonLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-4 w-full block bg-samurai-gold text-black font-bold py-2 rounded text-center hover:opacity-90 transition"
+                    >
+                      詳しく見る
+                    </a>
+                  )}
+                  {book.status === "coming" && (
+                    <div className="mt-4 w-full text-center text-gray-500 py-2 text-sm">
+                      近日公開予定
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Daily Problem Section */}
+      <section id="guides" className="py-16 sm:py-24 bg-samurai-light">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-samurai-navy mb-12 text-center">
             📖 毎日の問題
@@ -144,8 +246,31 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. Book Section */}
-      <section id="books" className="py-16 sm:py-24 bg-white">
+      {/* 「こんな方におすすめ！」セクション */}
+      <section className="py-16 sm:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-samurai-navy mb-4">こんな方におすすめ！</h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {[
+              "✓ 登録日本語教員試験の合格を目指している",
+              "✓ 独学でも効率的に学習したい",
+              "✓ 実践的な問題で試験に備えておきたい",
+              "✓ 日本語教育の知識を体系的に学びたい"
+            ].map((item, idx) => (
+              <div key={idx} className="flex items-start gap-4 p-4 bg-blue-50 rounded-lg">
+                <span className="text-2xl flex-shrink-0">✅</span>
+                <p className="text-gray-700 font-medium">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Book Info Section */}
+      <section className="py-16 sm:py-24 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-samurai-navy mb-12 text-center">
             📚 書籍について
@@ -191,7 +316,59 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6. SNS Embed Section */}
+      {/* ブログ記事セクション */}
+      <section id="blog" className="py-16 sm:py-24 bg-gradient-to-b from-white to-blue-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-samurai-navy mb-4">📖 最新情報・学習コラム</h2>
+            <p className="text-gray-600">試験対策に役立つ情報を随時更新</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "[試験対策] CBT方式とは?",
+                desc: "新しい試験形式を詳しく解説。メリット・デメリット、対策ポイントまで。",
+                date: "2026.11.15",
+                badge: "試験対策"
+              },
+              {
+                title: "[学習法] 日本語教員試験の効率的な勉強スケジュール",
+                desc: "限られた時間で確実に力をつけるための学習方法とは。",
+                date: "2026.11.12",
+                badge: "学習法"
+              },
+              {
+                title: "[用語解説] よく出る重要用語10選",
+                desc: "SLA・CEFR・Can-do など、頻出キーワードを解説。",
+                date: "2026.11.10",
+                badge: "用語解説"
+              }
+            ].map((article, idx) => (
+              <div key={idx} className="bg-white rounded-lg shadow-md hover:shadow-lg transition overflow-hidden">
+                <div className="bg-gradient-to-r from-samurai-navy to-blue-700 text-white p-4">
+                  <span className="bg-samurai-gold text-black text-xs font-bold px-2 py-1 rounded inline-block mb-2">
+                    {article.badge}
+                  </span>
+                </div>
+                <div className="p-6">
+                  <h3 className="font-bold text-samurai-navy mb-2 line-clamp-2">{article.title}</h3>
+                  <p className="text-sm text-gray-600 mb-4">{article.desc}</p>
+                  <div className="text-xs text-gray-500">{article.date}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <a href="#blog" className="text-samurai-navy font-bold hover:text-samurai-gold transition">
+              ブログ一覧を見る →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* SNS Section */}
       <section id="sns" className="py-16 sm:py-24 bg-samurai-light">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-samurai-navy mb-12 text-center">
