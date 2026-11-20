@@ -136,7 +136,7 @@ export default function Home() {
             {[
               {
                 title: "壱ノ巻",
-                subtitle: "応用試験・読解",
+                subtitle: "応用試験・読解／模擬問題3回分／全180問",
                 badge: "販売中",
                 badgeColor: "bg-samurai-gold",
                 features: ["✓ CBT対応", "✓ 本番レベルの模試試験", "✓ 詳しい解説つき"],
@@ -145,7 +145,7 @@ export default function Home() {
               },
               {
                 title: "弐ノ巻",
-                subtitle: "基礎+応用",
+                subtitle: "基礎＋応用／総合対策",
                 badge: "企画中",
                 badgeColor: "bg-green-600",
                 features: ["✓ 基礎から応用まで網羅", "✓ 頻出テーマで体系整理", "✓ 演習問題で定着"],
@@ -154,7 +154,7 @@ export default function Home() {
               },
               {
                 title: "参ノ巻",
-                subtitle: "60日で合格カップ",
+                subtitle: "60日で合格力アップ",
                 badge: "企画中",
                 badgeColor: "bg-orange-600",
                 features: ["✓ 60日の学習プラン", "✓ 重要ポイントの解説", "✓ 実績・機械問題つき"],
@@ -203,15 +203,15 @@ export default function Home() {
           <h2 className="text-4xl font-bold text-samurai-navy mb-12 text-center">
             📖 毎日の問題
           </h2>
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-white p-8 rounded-lg shadow-md">
               <h3 className="text-xl font-bold text-samurai-navy mb-4">
-                今日の問題
+                📸 Instagram
               </h3>
               <div className="bg-samurai-light p-6 rounded mb-4 min-h-[150px] flex items-center justify-center">
                 <p className="text-gray-600 text-center">
                   毎日10:00に問題を配信します。<br />
-                  SNSとホームページで同時配信。
+                  写真で分かりやすく学べます。
                 </p>
               </div>
               <a
@@ -220,17 +220,17 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="text-samurai-navy font-bold hover:text-samurai-gold transition"
               >
-                → Instagramで確認
+                → @samurai.nihongo.lab
               </a>
             </div>
             <div className="bg-white p-8 rounded-lg shadow-md">
               <h3 className="text-xl font-bold text-samurai-navy mb-4">
-                回答・解説
+                𝕏 X
               </h3>
               <div className="bg-samurai-light p-6 rounded mb-4 min-h-[150px] flex items-center justify-center">
                 <p className="text-gray-600 text-center">
                   毎日20:00に回答と詳細な解説を配信。<br />
-                  詳しく学べる内容で力がつきます。
+                  スレッドで深掘り解説。
                 </p>
               </div>
               <a
@@ -239,7 +239,26 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="text-samurai-navy font-bold hover:text-samurai-gold transition"
               >
-                → Xで確認
+                → @samurai_nihongo
+              </a>
+            </div>
+            <div className="bg-white p-8 rounded-lg shadow-md">
+              <h3 className="text-xl font-bold text-samurai-navy mb-4">
+                🧵 Threads
+              </h3>
+              <div className="bg-samurai-light p-6 rounded mb-4 min-h-[150px] flex items-center justify-center">
+                <p className="text-gray-600 text-center">
+                  コミュニティで質問・相談。<br />
+                  他の学習者と交流できます。
+                </p>
+              </div>
+              <a
+                href={threadsLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-samurai-navy font-bold hover:text-samurai-gold transition"
+              >
+                → Threads で交流
               </a>
             </div>
           </div>
