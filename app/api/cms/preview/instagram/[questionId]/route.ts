@@ -14,6 +14,7 @@ export async function GET(
     const { questionId } = await params;
     const { searchParams } = new URL(request.url);
     const style = (searchParams.get("style") as "light" | "dark") || "light";
+    const templateId = searchParams.get("templateId") || "tpl_ig_default";
 
     // Fetch question from database
     const { data: question, error } = await supabaseAdmin

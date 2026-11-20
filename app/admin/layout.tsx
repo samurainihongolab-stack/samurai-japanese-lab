@@ -25,6 +25,7 @@ export default function AdminLayout({
           <NavItem href="/admin/approval" label="承認フロー" icon="✅" />
           <NavItem href="/admin/schedule" label="配信スケジュール" icon="📅" />
           <NavItem href="/admin/preview" label="プレビュー" icon="👁️" />
+          <NavItem href="/admin/templates" label="テンプレート" icon="🎨" />
           <NavItem href="/admin/analytics" label="分析" icon="📈" />
           <NavItem href="/admin/settings" label="設定" icon="⚙️" />
         </nav>
