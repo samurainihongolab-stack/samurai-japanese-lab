@@ -1,0 +1,60 @@
+import { SITE } from "../lib/site";
+import SnsFollow from "./SnsFollow";
+import { ArrowIcon } from "./Icons";
+
+// TODO(運営者確認): 配信時刻（10:00・20:00）のタイムゾーンは未確定。確認後に明記する。
+export default function DailyProblem() {
+  return (
+    <section id="daily" className="bg-samurai-light py-16 sm:py-20">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <h2 className="mb-3 text-center font-wa text-3xl font-extrabold text-samurai-navy sm:text-4xl">
+          毎日の問題
+        </h2>
+        <p className="mx-auto mb-10 max-w-2xl text-center text-samurai-ink/80">
+          問題と解説を、毎日SNSで配信しています。まずは今日の問題に挑戦してみましょう。
+        </p>
+
+        <div className="grid gap-6 md:grid-cols-2">
+          <article className="rounded-2xl bg-white p-7 shadow-md">
+            <p className="text-sm font-bold text-samurai-blue">毎日 10:00</p>
+            <h3 className="mt-1 text-xl font-bold text-samurai-navy">今日の問題</h3>
+            <p className="mt-3 text-samurai-ink/80">
+              試験を意識した問題を、1問ずつお届けします。答えは、解説の配信まで公開しません。
+            </p>
+            <a
+              href={SITE.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-flex min-h-11 items-center gap-2 font-bold text-samurai-navy hover:text-samurai-blue transition"
+            >
+              Instagramで問題を見る
+              <ArrowIcon className="h-4 w-4" />
+            </a>
+          </article>
+
+          <article className="rounded-2xl bg-white p-7 shadow-md">
+            <p className="text-sm font-bold text-samurai-blue">毎日 20:00</p>
+            <h3 className="mt-1 text-xl font-bold text-samurai-navy">回答・解説</h3>
+            <p className="mt-3 text-samurai-ink/80">
+              正解の根拠と、まちがいやすい選択肢のポイントを解説します。
+            </p>
+            <a
+              href={SITE.xUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-flex min-h-11 items-center gap-2 font-bold text-samurai-navy hover:text-samurai-blue transition"
+            >
+              Xで解説を見る
+              <ArrowIcon className="h-4 w-4" />
+            </a>
+          </article>
+        </div>
+
+        <div className="mt-8 flex flex-col items-center gap-3">
+          <p className="text-sm font-medium text-samurai-navy">フォローすると、毎日の問題を見逃しません。</p>
+          <SnsFollow />
+        </div>
+      </div>
+    </section>
+  );
+}

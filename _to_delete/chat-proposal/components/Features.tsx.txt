@@ -1,0 +1,29 @@
+import { BookIcon, CalendarIcon, ChartIcon, TargetIcon } from "./Icons";
+
+const FEATURES = [
+  { Icon: BookIcon, label: "試験に直結する", strong: "実戦的な問題" },
+  { Icon: TargetIcon, label: "基礎から応用まで", strong: "体系的に学べる" },
+  { Icon: CalendarIcon, label: "スケジュールで", strong: "計画的に学習" },
+  { Icon: ChartIcon, label: "合格力を", strong: "効率的にアップ" },
+];
+
+export default function Features() {
+  return (
+    <section aria-label="学習の特長" className="bg-samurai-light bg-seigaiha-light">
+      <ul className="mx-auto grid max-w-7xl grid-cols-1 gap-y-5 min-[520px]:grid-cols-2 px-4 py-8 sm:px-6 lg:grid-cols-4 lg:px-8">
+        {FEATURES.map(({ Icon, label, strong }) => (
+          <li key={strong} className="flex items-center gap-3 lg:justify-center">
+            <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-samurai-navy text-white">
+              <Icon className="h-7 w-7" />
+            </span>
+            <span className="text-sm font-bold leading-snug text-samurai-navy sm:text-base">
+              {label}
+              <br />
+              {strong}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}

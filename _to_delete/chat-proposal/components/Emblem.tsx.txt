@@ -1,0 +1,11 @@
+/** 「侍」の紋。ブランドのアクセントとして、ヘッダーとフッターで使う。 */
+export default function Emblem({ className = "h-11 w-11 text-2xl" }: { className?: string }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={`grid shrink-0 place-items-center rounded-full border-[3px] border-white bg-samurai-navy font-bold text-white font-wa leading-none ${className}`}
+    >
+      侍
+    </span>
+  );
+}

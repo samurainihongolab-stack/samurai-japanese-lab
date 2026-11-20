@@ -1,0 +1,43 @@
+import Image from "next/image";
+import { CheckIcon } from "./Icons";
+
+const ITEMS = [
+  "登録日本語教員試験の合格を目指している",
+  "独学でも効率的に学習したい",
+  "実戦的な問題で試験に慣れておきたい",
+  "日本語教育の知識を体系的に学びたい",
+];
+
+export default function Recommended() {
+  return (
+    <section className="bg-gradient-to-r from-[#fff5f7] via-white to-samurai-light py-14 sm:py-16">
+      <div className="mx-auto grid max-w-5xl items-center gap-6 px-4 sm:px-6 md:grid-cols-[280px_1fr] lg:px-8">
+        <div className="mx-auto w-56 overflow-hidden rounded-2xl md:w-full">
+          <Image
+            src="/brand/ryo-cheer.jpg"
+            alt="黄色い髪留めと眼鏡のリョウが、拳を握って笑顔で応援している。"
+            width={300}
+            height={243}
+            sizes="(min-width: 768px) 280px, 224px"
+            className="h-auto w-full [mask-image:linear-gradient(to_right,black_75%,transparent)]"
+          />
+        </div>
+        <div>
+          <h2 className="font-wa text-3xl font-extrabold text-samurai-navy sm:text-4xl">
+            こんな方におすすめ！
+          </h2>
+          <ul className="mt-5 space-y-3">
+            {ITEMS.map((item) => (
+              <li key={item} className="flex items-start gap-3 text-base font-medium text-samurai-ink sm:text-lg">
+                <span className="mt-1 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-samurai-red text-white">
+                  <CheckIcon className="h-4 w-4" />
+                </span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}
