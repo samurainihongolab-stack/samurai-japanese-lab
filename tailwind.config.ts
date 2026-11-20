@@ -7,7 +7,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "samurai-navy": "#0B2D6B",
+        "samurai-navy": "#082D6B",
+        "samurai-blue": "#0077D6",
         "samurai-gold": "#FFD600",
         "samurai-red": "#E60012",
         "samurai-light": "#E6F4FF",

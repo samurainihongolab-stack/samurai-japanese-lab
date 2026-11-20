@@ -1,11 +1,24 @@
 @import "tailwindcss";
 
+@theme {
+  --color-background: #ffffff;
+  --color-foreground: #171717;
+  --color-samurai-navy: #082D6B;
+  --color-samurai-blue: #0077D6;
+  --color-samurai-gold: #FFD600;
+  --color-samurai-red: #E60012;
+  --color-samurai-light: #E6F4FF;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --samurai-navy: #082D6B;
-  --samurai-gold: #FFD600;
-  --samurai-red: #E60012;
 }
 
 @media (prefers-color-scheme: dark) {
