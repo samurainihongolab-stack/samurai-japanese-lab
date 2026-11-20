@@ -8,13 +8,16 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header/Navigation - 拡張版 */}
+      {/* Header/Navigation */}
       <header className="sticky top-0 z-50 bg-samurai-navy text-white shadow-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <div className="flex justify-between items-center">
-            <div className="text-2xl font-bold flex items-center gap-2">
-              <span>🥋</span>
-              <span>侍日本語ラボ</span>
+            <div className="flex items-center">
+              <img
+                src="/images/brand/logo.png"
+                alt="侍日本語ラボ"
+                className="h-14 w-auto"
+              />
             </div>
             <nav className="hidden sm:flex gap-8 text-sm">
               <a href="#home" className="hover:text-samurai-gold transition">
@@ -48,13 +51,16 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Hero Section - 新デザイン（キャラクター・背景イラスト対応） */}
-      <section className="relative bg-gradient-to-br from-samurai-navy via-blue-700 to-samurai-navy overflow-hidden">
-        {/* 背景パターン（波・桜モチーフ） */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-samurai-gold to-transparent rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-400 to-transparent rounded-full blur-3xl"></div>
-        </div>
+      {/* Hero Section */}
+      <section
+        className="relative bg-cover bg-center bg-no-repeat overflow-hidden"
+        style={{
+          backgroundImage: "url(/images/brand/hero-bg.png)",
+          minHeight: "500px"
+        }}
+      >
+        {/* オーバーレイ（テキスト読みやすさ用） */}
+        <div className="absolute inset-0 bg-black/30"></div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-32">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
@@ -63,11 +69,10 @@ export default function Home() {
               <div className="mb-4 inline-block bg-samurai-gold text-black px-4 py-2 rounded-full font-bold text-sm">
                 登録日本語教員試験対策
               </div>
-              <h1 className="text-5xl sm:text-6xl font-bold mb-6">
-                <span className="block text-white">侍</span>
-                <span className="block text-5xl sm:text-5xl">日本語ラボ</span>
+              <h1 className="text-4xl sm:text-5xl font-bold mb-6">
+                侍日本語ラボ
               </h1>
-              <p className="text-xl text-blue-100 mb-8 leading-relaxed max-w-lg">
+              <p className="text-lg sm:text-xl text-white mb-8 leading-relaxed max-w-lg font-medium">
                 日本語教の学びを、<br />
                 もっと分かりやすく、もっと実践的に。
               </p>
@@ -80,26 +85,23 @@ export default function Home() {
                 </a>
                 <a
                   href="#guides"
-                  className="inline-block bg-blue-500 text-white px-8 py-3 rounded-lg font-bold hover:opacity-90 transition text-center"
+                  className="inline-block bg-white/90 text-samurai-navy px-8 py-3 rounded-lg font-bold hover:opacity-90 transition text-center"
                 >
                   学習ガイド
                 </a>
               </div>
             </div>
 
-            {/* 右側：プレースホルダー（キャラクター画像エリア） */}
-            <div className="relative h-96 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center border-4 border-samurai-gold">
-              <div className="text-center text-white opacity-75">
-                <p className="text-2xl mb-2">🎨 キャラクター</p>
-                <p className="text-sm">侍・主人公・さくら先生</p>
-                <p className="text-xs mt-2">（画像統合予定）</p>
-              </div>
+            {/* 右側：リョウのキャラクター */}
+            <div className="flex justify-center">
+              <img
+                src="/images/brand/character-ryo.png"
+                alt="主人公リョウ"
+                className="h-96 w-auto object-contain"
+              />
             </div>
           </div>
         </div>
-
-        {/* 下部の波パターン */}
-        <div className="absolute bottom-0 left-0 right-0 h-20 bg-white opacity-10 transform -skew-y-2"></div>
       </section>
 
       {/* 4つの特徴セクション */}
