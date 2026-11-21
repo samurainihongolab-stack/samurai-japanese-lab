@@ -20,6 +20,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 90px;
+  /* Vercel rebuild trigger */
 }
 
 body {
