@@ -397,6 +397,64 @@ export default function Home() {
         </section>
       </main>
 
+      {/* SNS Section */}
+      <section className="px-6 sm:px-8 py-16 bg-white border-t border-pale">
+        <div className="max-w-[1120px] mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-black text-deep mb-8 text-center">
+            SNS で学びを続ける
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Twitter/X */}
+            <div className="text-center">
+              <h3 className="text-xl font-black text-navy mb-3">𝕏 (Twitter)</h3>
+              <p className="text-sm text-muted mb-4">
+                最新の教材情報と試験トレンドをリアルタイムで配信
+              </p>
+              <a
+                href="https://x.com/samurai_nihongo"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-navy text-white px-5 py-2 rounded-lg font-bold text-sm hover:brightness-110 transition"
+              >
+                @samurai_nihongo を フォロー
+              </a>
+            </div>
+
+            {/* Instagram */}
+            <div className="text-center">
+              <h3 className="text-xl font-black text-navy mb-3">📸 Instagram</h3>
+              <p className="text-sm text-muted mb-4">
+                学習のコツと日本語教育に関する詳細情報を毎日シェア
+              </p>
+              <a
+                href="https://instagram.com/samurai.nihongo.lab"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-navy text-white px-5 py-2 rounded-lg font-bold text-sm hover:brightness-110 transition"
+              >
+                @samurai.nihongo.lab をフォロー
+              </a>
+            </div>
+
+            {/* Threads */}
+            <div className="text-center">
+              <h3 className="text-xl font-black text-navy mb-3">💬 Threads</h3>
+              <p className="text-sm text-muted mb-4">
+                教育現場の知見と深い議論をコミュニティで展開
+              </p>
+              <a
+                href="https://threads.net/@samurai.nihongo.lab"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-navy text-white px-5 py-2 rounded-lg font-bold text-sm hover:brightness-110 transition"
+              >
+                コミュニティに参加する
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="bg-deep text-blue-100 px-6 sm:px-8 py-12">
         <div className="max-w-[1120px] mx-auto">
@@ -419,6 +477,19 @@ export default function Home() {
                 </a>
                 <a href="#about" className="hover:text-white transition">
                   ブランド紹介
+                </a>
+              </div>
+            </div>
+            <div className="sm:text-right">
+              <div className="flex flex-col gap-2 text-xs sm:items-end">
+                <a href="https://x.com/samurai_nihongo" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">
+                  𝕏 (Twitter)
+                </a>
+                <a href="https://instagram.com/samurai.nihongo.lab" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">
+                  Instagram
+                </a>
+                <a href="https://threads.net/@samurai.nihongo.lab" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">
+                  Threads
                 </a>
               </div>
             </div>
