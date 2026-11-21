@@ -7,15 +7,23 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "samurai-navy": "#082D6B",
-        "samurai-blue": "#0077D6",
-        "samurai-gold": "#FFD600",
-        "samurai-red": "#E60012",
-        "samurai-light": "#E6F4FF",
+        navy: "#082D6B",
+        deep: "#061c3c",
+        blue: "#0077D6",
+        yellow: "#FFD600",
+        red: "#E60012",
+        pale: "#E6F4FF",
+        text: "#142b47",
+        muted: "#5b6a7b",
       },
       fontFamily: {
-        sans: ["var(--font-geist-sans)", "sans-serif"],
-        mono: ["var(--font-geist-mono)", "monospace"],
+        sans: ["-apple-system", "BlinkMacSystemFont", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", "sans-serif"],
+      },
+      spacing: {
+        "13": "52px",
+      },
+      fontSize: {
+        "2xs": "9px",
       },
     },
   },
