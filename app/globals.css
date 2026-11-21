@@ -1,14 +1,20 @@
 @import "tailwindcss";
 
-:root {
-  --navy: #082D6B;
-  --deep: #061c3c;
-  --blue: #0077D6;
-  --yellow: #FFD600;
-  --red: #E60012;
-  --pale: #E6F4FF;
-  --text: #142b47;
-  --muted: #5b6a7b;
+@theme {
+  --color-navy: #082D6B;
+  --color-deep: #061c3c;
+  --color-blue: #0077D6;
+  --color-yellow: #FFD600;
+  --color-red: #E60012;
+  --color-pale: #E6F4FF;
+  --color-text: #142b47;
+  --color-muted: #5b6a7b;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+
+  --spacing-13: 52px;
+
+  --font-size-2xs: 9px;
 }
 
 html {
