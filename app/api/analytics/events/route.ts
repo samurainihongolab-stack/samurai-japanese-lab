@@ -4,6 +4,13 @@ import type { AnalyticsEvent } from "@/lib/analytics/events";
 
 export async function POST(request: NextRequest) {
   try {
+    if (!supabaseAdmin) {
+      return NextResponse.json(
+        { success: false, error: "Database not configured" },
+        { status: 503 }
+      );
+    }
+
     const body: AnalyticsEvent = await request.json();
     const { eventName, questionId, source, userId, metadata } = body;
 

@@ -4,6 +4,13 @@ import { verifyRequest } from "@/lib/auth/jwt";
 
 export async function GET(request: NextRequest) {
   try {
+    if (!supabaseAdmin) {
+      return NextResponse.json(
+        { success: false, error: "Database not configured" },
+        { status: 503 }
+      );
+    }
+
     const user = verifyRequest(request);
     if (!user) return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
 
@@ -27,7 +34,7 @@ export async function GET(request: NextRequest) {
     const end = new Date(endDate);
 
     // Fetch events for this question in date range
-    let query = supabaseAdmin
+    let query = supabaseAdmin!
       .from("analytics_events")
       .select("*")
       .eq("questionId", questionId)
@@ -40,13 +47,13 @@ export async function GET(request: NextRequest) {
 
     // Calculate statistics
     const stats = {
-      views: events.filter((e) => e.eventName === "page_view").length,
-      clicks: events.filter((e) => e.eventName === "social_outbound_click").length,
-      quizStarts: events.filter((e) => e.eventName === "quiz_start").length,
-      quizCompletions: events.filter((e) => e.eventName === "quiz_submit").length,
-      explanationViews: events.filter((e) => e.eventName === "explanation_view").length,
-      bookViews: events.filter((e) => e.eventName === "book_view").length,
-      amazonClicks: events.filter((e) => e.eventName === "amazon_outbound_click").length,
+      views: (events as any[]).filter((e: any) => e.eventName === "page_view").length,
+      clicks: (events as any[]).filter((e: any) => e.eventName === "social_outbound_click").length,
+      quizStarts: (events as any[]).filter((e: any) => e.eventName === "quiz_start").length,
+      quizCompletions: (events as any[]).filter((e: any) => e.eventName === "quiz_submit").length,
+      explanationViews: (events as any[]).filter((e: any) => e.eventName === "explanation_view").length,
+      bookViews: (events as any[]).filter((e: any) => e.eventName === "book_view").length,
+      amazonClicks: (events as any[]).filter((e: any) => e.eventName === "amazon_outbound_click").length,
     };
 
     // Calculate derived metrics
@@ -55,8 +62,8 @@ export async function GET(request: NextRequest) {
       stats.quizStarts > 0 ? (stats.quizCompletions / stats.quizStarts).toFixed(2) : "0.00";
 
     // Source breakdown
-    const sourceBreakdown = events.reduce(
-      (acc, event) => {
+    const sourceBreakdown = (events as any[]).reduce(
+      (acc: Record<string, number>, event: any) => {
         acc[event.source] = (acc[event.source] || 0) + 1;
         return acc;
       },
@@ -64,8 +71,8 @@ export async function GET(request: NextRequest) {
     );
 
     // Event breakdown
-    const eventBreakdown = events.reduce(
-      (acc, event) => {
+    const eventBreakdown = (events as any[]).reduce(
+      (acc: Record<string, number>, event: any) => {
         acc[event.eventName] = (acc[event.eventName] || 0) + 1;
         return acc;
       },
@@ -73,8 +80,8 @@ export async function GET(request: NextRequest) {
     );
 
     // Hourly data for trending
-    const hourlyData = events.reduce(
-      (acc, event) => {
+    const hourlyData = (events as any[]).reduce(
+      (acc: Record<string, number>, event: any) => {
         const hour = new Date(event.timestamp).toISOString().substring(0, 13);
         acc[hour] = (acc[hour] || 0) + 1;
         return acc;
