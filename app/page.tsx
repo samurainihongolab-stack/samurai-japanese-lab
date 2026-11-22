@@ -92,7 +92,7 @@ export default function Home() {
               <span className="tag">壱ノ巻・販売中</span>
               <h3>応用試験・読解 模擬問題3回分</h3>
               <p>全180問・解説付き。CBT方式の操作説明も収録。</p>
-              <a className="gold" href={SITE.amazonBook1} target="_blank" rel="noopener noreferrer">Amazonで書籍を探す</a>
+              <a className="gold" href={SITE.amazonBook1} target="_blank" rel="noopener noreferrer">Amazonで購入する</a>
             </article>
             <article className="card">
               <img className="bookimg" src="/images/brand/book-preview-1.webp" alt="弐ノ巻 基礎＋応用 総合対策（企画中）" />
@@ -171,7 +171,7 @@ export default function Home() {
 
         <section className="approved-visual footer-art" aria-label="侍日本語ラボ 書籍のご案内">
           <img src="/images/brand/approved-footer.webp" alt="侍日本語ラボ。日本語教育の学びを、あなたの合格力に。" />
-          <a href="#books" aria-label="書籍シリーズを見る" />
+          <a href={SITE.amazonBook1} target="_blank" rel="noopener noreferrer" aria-label="Amazonで書籍を見る" />
         </section>
       </main>
 
