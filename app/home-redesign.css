@@ -24,3 +24,19 @@
 .footer-art>a{display:block}
 @media(max-width:1100px){.nav-follow{display:none}.nav.open .nav-follow{display:inline-block;width:fit-content}}
 @media(max-width:560px){.social-grid[data-count]{grid-template-columns:1fr}}
+
+/* ===== 特長紹介帯（HTML・CSS・SVG）: 画像ベースから再構築。クリック要素なし ===== */
+.features-band{position:relative;background:#f6f1e5;border-top:1px solid #d9b45a;border-bottom:1px solid #d9b45a;padding:14px clamp(14px,3vw,48px);overflow:hidden}
+.features-band::before,.features-band::after{content:"";position:absolute;bottom:0;width:150px;height:46px;pointer-events:none;opacity:.55;background:radial-gradient(circle at 50% 100%,transparent 52%,#d9ccaa 54% 58%,transparent 60%) 0 100%/26px 13px repeat-x,radial-gradient(circle at 50% 100%,transparent 52%,#d9ccaa 54% 58%,transparent 60%) 13px calc(100% - 6px)/26px 13px repeat-x}
+.features-band::before{left:0;-webkit-mask-image:linear-gradient(90deg,#000,transparent);mask-image:linear-gradient(90deg,#000,transparent)}
+.features-band::after{right:0;-webkit-mask-image:linear-gradient(270deg,#000,transparent);mask-image:linear-gradient(270deg,#000,transparent)}
+.features-list{position:relative;z-index:1;list-style:none;margin:0 auto;padding:0;max-width:1180px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.features-list li{display:flex;align-items:center;justify-content:center;gap:12px;padding:6px 10px;min-width:0}
+.features-list li+li{border-left:1px solid transparent;border-image:linear-gradient(transparent,#c9a24a,transparent) 1}
+.feature-icon{flex:0 0 48px;width:48px;height:48px;border-radius:50%;background:#082d6b;color:#fff;display:grid;place-items:center;box-shadow:0 0 0 2px #f6f1e5,0 0 0 3.5px #c9a24a}
+.feature-icon svg{width:26px;height:26px}
+.feature-text{color:#082d6b;font-weight:800;font-size:15px;line-height:1.45;letter-spacing:.02em}
+@media(max-width:1100px) and (min-width:861px){.feature-text{font-size:13.5px}.features-list li{gap:9px;padding:6px 6px}.feature-icon{flex-basis:42px;width:42px;height:42px}.feature-icon svg{width:23px;height:23px}}
+@media(max-width:860px){.features-band{padding:10px 12px}.features-list{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:2px}.features-list li{justify-content:flex-start;gap:10px;padding:9px 6px 9px 14px}.features-list li+li{border-image:none;border-left:0}.features-list li:nth-child(even){border-left:1px solid #d9b45a99}.features-list li:nth-child(n+3){border-top:1px solid #d9b45a66}.feature-icon{flex-basis:40px;width:40px;height:40px}.feature-icon svg{width:22px;height:22px}.feature-text{font-size:14px;line-height:1.4;letter-spacing:0;white-space:nowrap}}
+@media(max-width:560px){.features-list li{gap:6px;padding:8px 4px 8px 8px}.feature-icon{flex-basis:34px;width:34px;height:34px;box-shadow:0 0 0 2px #f6f1e5,0 0 0 3px #c9a24a}.feature-icon svg{width:19px;height:19px}.feature-text{font-size:clamp(11px,3.2vw,12.5px)}}
+@media(max-width:359px){.features-band{padding:8px 6px}.features-list li{gap:5px;padding:7px 2px 7px 6px}.feature-icon{flex-basis:28px;width:28px;height:28px}.feature-icon svg{width:16px;height:16px}.feature-text{font-size:10px}}

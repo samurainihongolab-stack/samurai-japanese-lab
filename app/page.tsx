@@ -3,6 +3,52 @@ import "./home-redesign.css";
 import { useState } from "react";
 import { SITE, SOCIAL_LINKS } from "@/lib/site";
 
+const FEATURES = [
+  {
+    title: "本番を意識した",
+    sub: "実践問題",
+    icon: (
+      <>
+        <path d="M7 3h8l4 4v14H7z" />
+        <path d="M15 3v4h4" />
+        <path d="M9.5 14l2 2 3.5-4" />
+      </>
+    ),
+  },
+  {
+    title: "登録日本語教員試験に",
+    sub: "特化",
+    icon: (
+      <>
+        <circle cx="12" cy="12" r="8" />
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 12l7-7M16 5h3v3" />
+      </>
+    ),
+  },
+  {
+    title: "CBT方式に対応した",
+    sub: "教材",
+    icon: (
+      <>
+        <rect x="3" y="4.5" width="18" height="12" rx="1.6" />
+        <path d="M8 20h8M12 16.5V20" />
+        <path d="M8 10.5l2.5 2.5L16 8" />
+      </>
+    ),
+  },
+  {
+    title: "解説で深める",
+    sub: "専門知識",
+    icon: (
+      <>
+        <path d="M9 18h6M10 21h4" />
+        <path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z" />
+      </>
+    ),
+  },
+];
+
 const items = [
   {
     cat: "教授法",
@@ -80,8 +126,23 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="approved-visual" aria-label="侍日本語ラボの学習メリット">
-          <img src="/images/brand/approved-benefits.webp" alt="試験に直結する実戦的な問題、基礎から応用まで体系的に学べる、スケジュールで計画的に学習、合格力を効率的にアップ" />
+        <section className="features-band" aria-label="侍日本語ラボの特長">
+          <ul className="features-list">
+            {FEATURES.map((f) => (
+              <li key={f.title}>
+                <span className="feature-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    {f.icon}
+                  </svg>
+                </span>
+                <span className="feature-text">
+                  {f.title}
+                  <br />
+                  {f.sub}
+                </span>
+              </li>
+            ))}
+          </ul>
         </section>
 
         <section className="section" id="books">
