@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const questions = [
   {
@@ -31,7 +31,7 @@ export default function Home() {
   const [answered, setAnswered] = useState(false);
   const [selected, setSelected] = useState<number | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [year, setYear] = useState(new Date().getFullYear());
+  const year = new Date().getFullYear();
 
   const q = questions[index];
 
@@ -58,11 +58,11 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white text-text">
       {/* Header */}
-      <header className="sticky top-0 z-20 bg-white shadow-sm">
+      <header className="sticky top-0 z-30 bg-[#061c3c]/95 backdrop-blur-md border-b border-white/10 shadow-lg">
         <div className="flex items-center justify-between gap-6 px-6 py-4 sm:px-8 max-w-[1120px] mx-auto">
           {/* Brand */}
-          <a href="#top" className="flex items-center gap-2.5 no-underline text-navy font-black text-lg sm:text-xl whitespace-nowrap leading-tight">
-            <img src="/images/brand/logo.png" alt="侍日本語ラボ ロゴ" className="w-13 h-13 object-contain" />
+          <a href="#top" className="flex items-center gap-3 no-underline text-white font-black text-base sm:text-xl whitespace-nowrap leading-tight">
+            <img src="/images/brand/logo.png" alt="侍日本語ラボ ロゴ" className="w-12 h-12 rounded-full object-cover border-2 border-yellow" />
             <span>
               侍日本語ラボ
               <small className="block text-2xs font-black tracking-widest mt-1">SAMURAI NIHONGO LAB</small>
@@ -74,7 +74,7 @@ export default function Home() {
             onClick={handleMenuClick}
             aria-label={menuOpen ? "メニューを閉じる" : "メニューを開く"}
             aria-expanded={menuOpen}
-            className="text-2xl text-navy border-0 bg-none cursor-pointer sm:hidden"
+            className="text-2xl text-white border-0 bg-transparent cursor-pointer sm:hidden"
           >
             ☰
           </button>
@@ -83,24 +83,24 @@ export default function Home() {
           <nav
             className={`${
               menuOpen ? "flex" : "hidden"
-            } absolute top-[69px] left-0 right-0 bg-white shadow-lg flex-col gap-3.5 p-6 sm:static sm:flex sm:flex-row sm:gap-6 sm:shadow-none sm:bg-transparent sm:p-0`}
+            } absolute top-[78px] left-0 right-0 bg-deep shadow-lg flex-col gap-3.5 p-6 sm:static sm:flex sm:flex-row sm:gap-6 sm:shadow-none sm:bg-transparent sm:p-0`}
           >
-            <a href="#books" onClick={closeMenu} className="font-bold text-sm sm:text-xs hover:text-blue">
+            <a href="#books" onClick={closeMenu} className="font-bold text-sm sm:text-xs text-white/90 hover:text-yellow">
               教材紹介
             </a>
-            <a href="#practice" onClick={closeMenu} className="font-bold text-sm sm:text-xs hover:text-blue">
-              無料
+            <a href="#practice" onClick={closeMenu} className="font-bold text-sm sm:text-xs text-white/90 hover:text-yellow">
+              無料演習
             </a>
-            <a href="#guide" onClick={closeMenu} className="font-bold text-sm sm:text-xs hover:text-blue">
+            <a href="#guide" onClick={closeMenu} className="font-bold text-sm sm:text-xs text-white/90 hover:text-yellow">
               学習ガイド
             </a>
-            <a href="#about" onClick={closeMenu} className="font-bold text-sm sm:text-xs hover:text-blue">
+            <a href="#about" onClick={closeMenu} className="font-bold text-sm sm:text-xs text-white/90 hover:text-yellow">
               ラボについて
             </a>
             <a
               href="#books"
               onClick={closeMenu}
-              className="hidden sm:inline-block bg-navy text-white px-4 py-2.5 rounded-lg font-bold text-xs hover:brightness-105"
+              className="hidden sm:inline-block bg-yellow text-deep px-4 py-2.5 rounded-lg font-black text-xs hover:brightness-105"
             >
               教材を見る
             </a>
@@ -109,45 +109,19 @@ export default function Home() {
       </header>
 
       <main id="top">
-        {/* Hero Section */}
-        <section className="relative h-[570px] bg-blue-900 overflow-hidden">
-          <img
-            src="/images/brand/hero-bg.png"
-            alt="富士山と大波、桜を眺める侍日本語ラボのキャラクター"
-            className="w-full h-full object-cover"
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background: "linear-gradient(90deg, rgba(3,22,51,.90), rgba(3,22,51,.73) 34%, rgba(3,22,51,.12) 75%)"
-            }}
-          ></div>
-
-          <div className="absolute inset-0 flex flex-col justify-center items-start px-6 sm:px-8 max-w-[1120px] mx-auto pointer-events-none">
-            <span className="pointer-events-auto inline-block border border-white border-opacity-50 rounded-full px-4 py-1 text-white text-xs font-bold tracking-widest mb-6">
-              登録日本語教員試験 対策教材
-            </span>
-
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-3 leading-tight pointer-events-auto">
-              学ぶ力を、<br />
-              <em className="font-black text-yellow not-italic">合格につながる力</em>へ。
-            </h1>
-
-            <p className="text-base sm:text-lg text-white font-semibold leading-relaxed mb-6 pointer-events-auto max-w-2xl">
-              知識を覚えるだけで終わらせない。<br />
-              考え、選び、解き切る力を育てる学習を。
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-3 flex-wrap pointer-events-auto">
-              <a
-                href="#books"
-                className="inline-flex items-center justify-center gap-3.5 bg-yellow text-deep px-6 py-3 rounded-lg font-black text-sm hover:brightness-105 transition"
-              >
-                教材をチェック <span>→</span>
-              </a>
-              <button className="inline-flex items-center justify-center border border-white text-white bg-white bg-opacity-10 px-6 py-3 rounded-lg font-black text-sm hover:bg-opacity-20 transition">
-                無料問題に挑戦
-              </button>
+        {/* Brand hero: the supplied panorama already contains the logo and Ryo. */}
+        <section className="hero-scene relative overflow-hidden bg-deep" aria-label="侍日本語ラボのメインビジュアル">
+          <img src="/images/brand/hero-bg.png" alt="桜、大波、富士山、侍のリョウを描いた侍日本語ラボの世界観" className="hero-scene-image" fetchPriority="high" />
+          <div className="hero-scene-shade" />
+          <div className="relative mx-auto flex min-h-[570px] max-w-[1120px] items-end px-6 pb-12 pt-44 sm:min-h-[620px] sm:items-center sm:pb-12 sm:pt-32 lg:min-h-[670px]">
+            <div className="hero-copy max-w-[590px] rounded-2xl p-5 sm:p-8">
+              <span className="inline-flex rounded-full bg-yellow px-4 py-1.5 text-xs font-black tracking-wide text-deep">令和9年度 登録日本語教員試験対策</span>
+              <h1 className="mt-5 text-3xl font-black leading-tight text-white sm:text-5xl lg:text-[54px]">学ぶ力を、<br/><span className="text-yellow">合格につながる力</span>へ。</h1>
+              <p className="mt-5 text-sm font-semibold leading-loose text-white/95 sm:text-base">知識を覚えるだけで終わらせない。<br/>考え、選び、解き切る力を育てる学習を。</p>
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+                <a href="#books" className="inline-flex items-center justify-center rounded-lg bg-yellow px-6 py-3.5 text-sm font-black text-deep transition hover:brightness-110">書籍シリーズを見る →</a>
+                <a href="#practice" className="inline-flex items-center justify-center rounded-lg border border-white/70 bg-deep/50 px-6 py-3.5 text-sm font-black text-white transition hover:bg-deep/80">無料問題に挑戦 →</a>
+              </div>
             </div>
           </div>
         </section>
@@ -201,7 +175,7 @@ export default function Home() {
                     <span>紙書籍</span>
                     <span>CBT操作・画面説明つき</span>
                   </div>
-                  <button className="w-full bg-navy text-white py-2.5 rounded-lg font-black text-sm hover:brightness-110 transition">
+                  <button className="w-full bg-navy text-white py-2.5 rounded-lg font-black text-sm opacity-60 cursor-not-allowed" disabled title="販売ページURLの設定待ち">
                     Amazonで詳細を見る →
                   </button>
                   <small className="text-xs text-gray-500 mt-2">販売ページURLを設定するとリンクが有効になります。</small>
@@ -397,60 +371,15 @@ export default function Home() {
         </section>
       </main>
 
-      {/* SNS Section */}
-      <section className="px-6 sm:px-8 py-16 bg-white border-t border-pale">
-        <div className="max-w-[1120px] mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-black text-deep mb-8 text-center">
-            SNS で学びを続ける
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Twitter/X */}
-            <div className="text-center">
-              <h3 className="text-xl font-black text-navy mb-3">𝕏 (Twitter)</h3>
-              <p className="text-sm text-muted mb-4">
-                最新の教材情報と試験トレンドをリアルタイムで配信
-              </p>
-              <a
-                href="https://x.com/samurai_nihongo"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block bg-navy text-white px-5 py-2 rounded-lg font-bold text-sm hover:brightness-110 transition"
-              >
-                @samurai_nihongo を フォロー
-              </a>
-            </div>
-
-            {/* Instagram */}
-            <div className="text-center">
-              <h3 className="text-xl font-black text-navy mb-3">📸 Instagram</h3>
-              <p className="text-sm text-muted mb-4">
-                学習のコツと日本語教育に関する詳細情報を毎日シェア
-              </p>
-              <a
-                href="https://instagram.com/samurai.nihongo.lab"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block bg-navy text-white px-5 py-2 rounded-lg font-bold text-sm hover:brightness-110 transition"
-              >
-                @samurai.nihongo.lab をフォロー
-              </a>
-            </div>
-
-            {/* Threads */}
-            <div className="text-center">
-              <h3 className="text-xl font-black text-navy mb-3">💬 Threads</h3>
-              <p className="text-sm text-muted mb-4">
-                教育現場の知見と深い議論をコミュニティで展開
-              </p>
-              <a
-                href="https://threads.net/@samurai.nihongo.lab"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block bg-navy text-white px-5 py-2 rounded-lg font-bold text-sm hover:brightness-110 transition"
-              >
-                コミュニティに参加する
-              </a>
-            </div>
+      <section id="social" className="bg-[#f2f7fc] px-6 py-16 sm:px-8 sm:py-20">
+        <div className="mx-auto max-w-[1120px]">
+          <span className="text-xs font-black tracking-widest text-blue">FOLLOW THE LAB</span>
+          <h2 className="mt-2 text-3xl font-black text-deep sm:text-4xl">SNSで、毎日の学びを。</h2>
+          <p className="mt-3 mb-8 text-sm text-muted">新しい問題・学習のヒント・教材情報を各SNSで発信します。</p>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+            <a href="https://x.com/samurai_nihongo" target="_blank" rel="noopener noreferrer" className="social-tile group"><span className="social-icon">𝕏</span><strong>X</strong><span>@samurai_nihongo</span><small>試験対策・最新のお知らせ →</small></a>
+            <a href="https://instagram.com/samurai.nihongo.lab" target="_blank" rel="noopener noreferrer" className="social-tile group"><span className="social-icon">◎</span><strong>Instagram</strong><span>@samurai.nihongo.lab</span><small>図解で学ぶ日本語教育 →</small></a>
+            <a href="https://www.threads.net/@samurai.nihongo.lab" target="_blank" rel="noopener noreferrer" className="social-tile group"><span className="social-icon">＠</span><strong>Threads</strong><span>@samurai.nihongo.lab</span><small>学びを深めるコミュニティ →</small></a>
           </div>
         </div>
       </section>
@@ -480,18 +409,11 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <div className="sm:text-right">
-              <div className="flex flex-col gap-2 text-xs sm:items-end">
-                <a href="https://x.com/samurai_nihongo" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">
-                  𝕏 (Twitter)
-                </a>
-                <a href="https://instagram.com/samurai.nihongo.lab" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">
-                  Instagram
-                </a>
-                <a href="https://threads.net/@samurai.nihongo.lab" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">
-                  Threads
-                </a>
-              </div>
+            <div className="flex flex-col gap-2 text-xs">
+              <strong className="text-sm text-white">公式SNS</strong>
+              <a href="https://x.com/samurai_nihongo" target="_blank" rel="noopener noreferrer" className="hover:text-white">X</a>
+              <a href="https://instagram.com/samurai.nihongo.lab" target="_blank" rel="noopener noreferrer" className="hover:text-white">Instagram</a>
+              <a href="https://www.threads.net/@samurai.nihongo.lab" target="_blank" rel="noopener noreferrer" className="hover:text-white">Threads</a>
             </div>
           </div>
           <div className="border-t border-white border-opacity-20 pt-4 text-center text-xs opacity-80">
