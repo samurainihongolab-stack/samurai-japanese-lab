@@ -203,7 +203,7 @@ export default function Home() {
             )}
           </div>
           <p className="follow-note">
-            毎日の一問は <a href={SITE.instagram} target="_blank" rel="noopener noreferrer">Instagram</a> でも更新します。
+            毎日の一問は <a href={SITE.x} target="_blank" rel="noopener noreferrer">X</a> や <a href={SITE.threads} target="_blank" rel="noopener noreferrer">Threads</a> でも更新します。
           </p>
         </section>
 
