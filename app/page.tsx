@@ -89,7 +89,7 @@ export default function Home() {
               教材紹介
             </a>
             <a href="#practice" onClick={closeMenu} className="font-bold text-sm sm:text-xs hover:text-blue">
-              無料演習
+              無料
             </a>
             <a href="#guide" onClick={closeMenu} className="font-bold text-sm sm:text-xs hover:text-blue">
               学習ガイド
