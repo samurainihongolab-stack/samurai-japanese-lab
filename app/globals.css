@@ -1,61 +1,35 @@
 @import "tailwindcss";
 
-/* Tailwind v4: expose brand tokens as generated utility classes. */
 @theme {
-  --color-navy: #082D6B;
-  --color-deep: #061c3c;
-  --color-blue: #0077D6;
-  --color-yellow: #FFD600;
-  --color-red: #E60012;
-  --color-pale: #E6F4FF;
-  --color-text: #142b47;
-  --color-muted: #5b6a7b;
-  --spacing-13: 52px;
-  --text-2xs: 9px;
-  --font-sans: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  --color-background: #ffffff;
+  --color-foreground: #171717;
+  --color-samurai-navy: #082D6B;
+  --color-samurai-blue: #0077D6;
+  --color-samurai-gold: #FFD600;
+  --color-samurai-red: #E60012;
+  --color-samurai-light: #E6F4FF;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
 
 :root {
-  --navy: #082D6B;
-  --deep: #061c3c;
-  --blue: #0077D6;
-  --yellow: #FFD600;
-  --red: #E60012;
-  --pale: #E6F4FF;
-  --text: #142b47;
-  --muted: #5b6a7b;
+  --background: #ffffff;
+  --foreground: #171717;
 }
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 90px;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
 }
 
 body {
-  margin: 0;
-  color: var(--text);
-  line-height: 1.75;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
 }
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
-  font: inherit;
-  cursor: pointer;
-}
-
-/* Visual QA: independent of Tailwind utility generation for hero composition. */
-.hero-scene-image { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center center; }
-.hero-scene-shade { position:absolute; inset:0; background:linear-gradient(90deg,rgba(3,17,40,.86) 0%,rgba(3,17,40,.70) 34%,rgba(3,17,40,.05) 80%); }
-.hero-copy { background:rgba(3,19,43,.35); backdrop-filter:blur(2px); }
-.social-tile { display:flex; flex-direction:column; gap:8px; border:1px solid #dce7f3; border-radius:18px; background:#fff; padding:28px; box-shadow:0 8px 24px rgba(6,28,60,.05); color:#061c3c; transition:transform .2s,box-shadow .2s; }
-.social-tile:hover { transform:translateY(-3px); box-shadow:0 14px 32px rgba(6,28,60,.12); }
-.social-tile strong { font-size:21px; }
-.social-tile span:not(.social-icon) { color:#496079; font-size:13px; overflow-wrap:anywhere; }
-.social-tile small { margin-top:10px; color:#0077D6; font-weight:700; }
-.social-icon { display:grid; place-items:center; width:54px; height:54px; border-radius:15px; background:#082D6B; color:#fff; font-size:30px; font-weight:800; }
-@media(max-width:640px) { .hero-scene-image {object-position:63% center;} .hero-scene-shade {background:linear-gradient(0deg,rgba(3,17,40,.93),rgba(3,17,40,.30) 70%,rgba(3,17,40,.12));} .hero-copy {width:100%; background:rgba(3,19,43,.42);} }
