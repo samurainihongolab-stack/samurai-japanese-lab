@@ -6,11 +6,10 @@ permissions:
   contents: read
 
 jobs:
-  verify:
-    runs-on: macos-latest
+  verify-portable:
+    runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
-      REQUIRE_AUDIT_SANDBOX: "1"
       SNS_MODE: dry-run
       QUIZ_BACKEND: file
       ADMIN_DEV_BYPASS: '0'
@@ -32,9 +31,13 @@ jobs:
         run: |
           mkdir -p verification-logs
           result=0
-          node --import tsx --test --test-concurrency=1 tests/*.test.mts tests/*.test.mjs > verification-logs/tests.log 2>&1 || result=1
+          node --import tsx --test --test-reporter=spec --test-concurrency=1 tests/*.test.mts tests/*.test.mjs > verification-logs/tests.log 2>&1 || result=1
           if ! grep -Eq '^ℹ tests 115$' verification-logs/tests.log; then
             echo 'Expected 115 tests' >> verification-logs/tests.log
+            result=1
+          fi
+          if ! grep -Eq '^ℹ skipped 6$' verification-logs/tests.log; then
+            echo 'Expected only six sandbox integration skips' >> verification-logs/tests.log
             result=1
           fi
           npm run build > verification-logs/build.log 2>&1 || result=1
@@ -43,6 +46,37 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: verification-logs
+          name: portable-verification-logs
+          path: verification-logs/
+          if-no-files-found: ignore
+
+  verify-macos-sandbox:
+    runs-on: macos-15-intel
+    timeout-minutes: 15
+    env:
+      REQUIRE_AUDIT_SANDBOX: "1"
+      SNS_MODE: dry-run
+      QUIZ_BACKEND: file
+      ADMIN_DEV_BYPASS: '0'
+      INSTAGRAM_CAROUSEL_ENABLED: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install dependencies
+        run: |
+          mkdir -p verification-logs
+          npm ci > verification-logs/install.log 2>&1
+      - name: Verify macOS audit sandbox
+        run: |
+          node --import tsx --test --test-reporter=spec tests/codex-review.test.mts > verification-logs/sandbox.log 2>&1
+          grep -Eq '^ℹ skipped 0$' verification-logs/sandbox.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: macos-sandbox-logs
           path: verification-logs/
           if-no-files-found: ignore

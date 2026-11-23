@@ -69,10 +69,14 @@ export async function classifyHttp(res: Response, what: string): Promise<never> 
 export async function fetchJson(url: string, init: RequestInit, what: string, timeoutMs = 20_000): Promise<unknown> {
   let res: Response;
   try {
-    res = await fetch(url, { ...init, signal: AbortSignal.timeout(timeoutMs) });
-  } catch (e) {
-    throw new PublishError(`${what}: 通信失敗/タイムアウト（送信結果不明）: ${redact(String(e))}`, "unknown");
+    res = await fetch(url, { ...init, redirect: "error", signal: AbortSignal.timeout(timeoutMs) });
+  } catch {
+    throw new PublishError(`${what}: 通信失敗/タイムアウト（送信結果不明）`, "unknown");
   }
   if (!res.ok) await classifyHttp(res, what);
-  return res.json();
+  try {
+    return await res.json();
+  } catch {
+    throw new PublishError(`${what}: 応答形式不明`, "unknown");
+  }
 }

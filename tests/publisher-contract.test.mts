@@ -13,7 +13,9 @@ test("each provider requires a confirmed publication ID and holds ambiguous resp
     THREADS_ACCESS_TOKEN: "fake", X_USER_ACCESS_TOKEN: "fake",
   });
   const replies: Response[] = [];
-  t.mock.method(globalThis, "fetch", async () => {
+  t.mock.method(globalThis, "fetch", async (_url: string, init: RequestInit) => {
+    assert.equal(init.redirect, "error");
+    assert.equal(new Headers(init.headers).get("authorization"), "Bearer fake");
     const reply = replies.shift();
     assert.ok(reply, "unexpected outbound operation");
     return reply;
@@ -31,6 +33,8 @@ test("each provider requires a confirmed publication ID and holds ambiguous resp
     assert.equal((await backend.post(content)).externalId, "20");
     assert.equal(replies.length, 0);
   }
+  replies.push(new Response("<not-json>"));
+  await assert.rejects(xLiveBackend().post(content), (e) => e instanceof PublishError && e.kind === "unknown");
   replies.push(new Response("fixture", { status: 408 }));
   await assert.rejects(xLiveBackend().post(content), (e) => e instanceof PublishError && e.kind === "unknown");
 });

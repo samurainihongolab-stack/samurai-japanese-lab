@@ -51,9 +51,11 @@ test('authentication uses the Buffer endpoint and bearer header', async () => {
   assert.equal(calls[0].authorization, 'Bearer test-key');
 });
 
-test('draft contains six ordered images and cannot schedule publication', async () => {
+test('draft requires a separate opt-in and contains six ordered images', async () => {
+  await assert.rejects(fixture().adapter.createDraft(post), /disabled/);
   const { adapter, calls } = fixture({
     publishingEnabled: false,
+    draftsEnabled: true,
     respond: () => result('draft'),
   });
   assert.equal((await adapter.createDraft(post)).imageCount, 6);
@@ -127,6 +129,8 @@ test('lost response stays unknown after repeated executions', async () => {
   for (let i = 0; i < 6; i++) assert.equal((await adapter.publish(job)).state, 'blocked');
   assert.equal(calls.length, 1);
   assert.equal(getState(), 'unknown');
+  const draft = fixture({ respond: () => result('draft') });
+  assert.equal((await draft.adapter.publish(job)).state, 'unknown');
 });
 
 test('if result persistence fails, the durable claim must still block another write', async () => {

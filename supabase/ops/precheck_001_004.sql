@@ -101,6 +101,13 @@ BEGIN
        OR (SELECT pg_catalog.string_agg(attname::text, ' ' ORDER BY attnum)
            FROM pg_catalog.pg_attribute WHERE attrelid = table_oid AND attnum > 0 AND NOT attisdropped)
           IS DISTINCT FROM expected.columns
+       OR (SELECT pg_catalog.string_agg(pg_catalog.format_type(atttypid, atttypmod), '|' ORDER BY attnum)
+           FROM pg_catalog.pg_attribute WHERE attrelid = table_oid AND attnum > 0 AND NOT attisdropped)
+          IS DISTINCT FROM (CASE table_name
+            WHEN 'quiz_questions' THEN 'text|text|text|text|jsonb|text|text|text|text|timestamp with time zone|timestamp with time zone|text|text|timestamp with time zone|timestamp with time zone|timestamp with time zone'
+            WHEN 'quiz_post_log' THEN 'uuid|text|text|text|integer|text|text|text|timestamp with time zone|timestamp with time zone|timestamp with time zone|timestamp with time zone|timestamp with time zone'
+            ELSE 'uuid|uuid|text|text|integer|text|text|timestamp with time zone'
+          END)
        OR NOT expected.constraints <@ ARRAY(SELECT conname::text FROM pg_catalog.pg_constraint WHERE conrelid = table_oid)
        OR (SELECT pg_catalog.array_agg(polname::text ORDER BY polname)
            FROM pg_catalog.pg_policy WHERE polrelid = table_oid)
@@ -126,6 +133,18 @@ BEGIN
     RAISE EXCEPTION 'STOP: 001 object name collision';
   END IF;
   IF table_count = 3 THEN
+    IF NOT EXISTS (
+      SELECT FROM pg_catalog.pg_index i
+      WHERE i.indexrelid = pg_catalog.to_regclass('public.quiz_post_attempts_q')
+        AND i.indrelid = 'public.quiz_post_attempts'::regclass
+        AND i.indisvalid AND i.indisready
+        AND pg_catalog.pg_get_indexdef(i.indexrelid, 1, true) = 'question_id'
+        AND pg_catalog.pg_get_indexdef(i.indexrelid, 2, true) = 'at'
+        AND (i.indoption[1] & 1) = 1
+        AND i.indnatts = 2 AND i.indpred IS NULL
+    ) THEN
+      RAISE EXCEPTION 'STOP: unexpected 001 quiz_post_attempts_q index';
+    END IF;
     RAISE NOTICE 'REVIEW_AFTER_001: compare listed objects and table definitions to audited 001; skip 001';
   ELSE
     RAISE NOTICE 'REVIEW_FRESH: no target objects found; verify project and migration hashes';

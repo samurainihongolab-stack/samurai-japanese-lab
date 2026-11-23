@@ -34,9 +34,15 @@ export async function GET(req: NextRequest) {
     const instagram = mode === "live" && process.env.INSTAGRAM_CAROUSEL_ENABLED === "true"
       ? await Promise.resolve().then(() => instagramService().run()).catch(() => ({ state: "error" }))
       : undefined;
+    console.info("cron/publish", {
+      mode,
+      stage: report.stage,
+      outcomes: report.outcomes.map(({ platform, result }) => ({ platform, result })),
+      instagram: instagram?.state,
+    });
     return NextResponse.json({ ok: true, instagram, mode, report });
-  } catch (e) {
-    console.error("cron/publish failed:", (e as Error).message);
+  } catch {
+    console.error("cron/publish failed");
     return NextResponse.json({ ok: false, error: "cycle failed" }, { status: 500 });
   }
 }

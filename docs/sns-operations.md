@@ -25,3 +25,16 @@
 
 Vercel設定の参照先
 https://vercel.com/docs/project-configuration/vercel-json#crons
+
+## 接続前チェック
+
+| 対象 | 設定と照合 |
+| --- | --- |
+| X | `X_USER_ID` と `X_USER_ACCESS_TOKEN` が同じ投稿者を指すことを承認後に確認する。アプリ専用トークンは使用しない。投稿・読み取りに必要なユーザー権限と、有効期限・更新手順を確認する。 |
+| Threads | `THREADS_USER_ID` と `THREADS_ACCESS_TOKEN` の組を確認する。コンテナ生成、公開、投稿一覧取得の権限を確認する。 |
+| Instagram単画像 | `IG_USER_ID`、`IG_ACCESS_TOKEN`、`IG_GRAPH_VERSION` はFacebook Graph APIの経路に合わせる。公開済み問題の承認ハッシュ付きJPEGを使う。 |
+| Bufferカルーセル | `BUFFER_API_KEY` と `BUFFER_INSTAGRAM_CHANNEL_ID`、Supabaseの005と画像ストレージが必要。下書き作成はアダプターに個別の許可が必要。運用サービスは実投稿を無効にしている。 |
+
+- 接続承認が出るまでは模擬応答だけで確認する。実アカウントIDとトークンの組、有効期限、実際の権限、各APIの利用枠は実接続時の確認事項。
+- Cronの関数ログには実行モード、処理段階と媒体ごとの結果分類が出る。リクエストの認証情報、本文、プロバイダーのレスポンス本文、一時画像URLは監視ログに出さない。
+- CIはUbuntuで横断テスト・型チェック・クリーンビルドを行い、macOSでは監査サンドボックスを必須にする。両方の実行結果を確認してからリリースを判断する。

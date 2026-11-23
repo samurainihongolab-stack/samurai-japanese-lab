@@ -94,6 +94,9 @@ test("001–004 preflight allows fresh and empty 001 states and rejects existing
     await db.exec(sql);
     await db.exec(rd("migrations", "001_quiz.sql"));
     await db.exec(sql);
+    await db.exec("drop index public.quiz_post_attempts_q; create index quiz_post_attempts_q on public.quiz_post_attempts(question_id, at)");
+    await assert.rejects(db.exec(sql), /unexpected 001 quiz_post_attempts_q index/);
+    await db.exec("rollback; drop index public.quiz_post_attempts_q; create index quiz_post_attempts_q on public.quiz_post_attempts(question_id, at desc)");
     await db.exec(row("p1", "published"));
     await assert.rejects(db.exec(sql), /quiz_questions contains 1 rows/);
     await db.exec("rollback; delete from public.quiz_questions; create table public.quiz_reviews(id int)");

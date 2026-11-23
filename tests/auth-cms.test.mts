@@ -373,5 +373,11 @@ test("persistent dry-run blocks Cron and admin publishing before database or SNS
       method: "POST", bearer: "tok-admin", body: { action, id: "q001", platform: "x" },
     }))).status, 409);
   }
+  process.env.SNS_MODE = "live";
+  delete process.env.CRON_PUBLISH_ENABLED;
+  assert.deepEqual(await (await cron.GET(req(route, { bearer: "aa" }))).json(),
+    { ok: true, mode: "live", state: "disabled" });
+  delete process.env.CRON_SECRET;
+  assert.equal((await cron.GET(req(route, { bearer: "aa" }))).status, 401);
   assert.deepEqual(calls, [base + "/auth/v1/user", base + "/auth/v1/user"]);
 });
