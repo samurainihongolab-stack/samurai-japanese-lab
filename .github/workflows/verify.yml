@@ -33,6 +33,10 @@ jobs:
           mkdir -p verification-logs
           result=0
           node --import tsx --test --test-concurrency=1 tests/*.test.mts tests/*.test.mjs > verification-logs/tests.log 2>&1 || result=1
+          if ! grep -Eq '^ℹ tests 115$' verification-logs/tests.log; then
+            echo 'Expected 115 tests' >> verification-logs/tests.log
+            result=1
+          fi
           npm run build > verification-logs/build.log 2>&1 || result=1
           node node_modules/typescript/bin/tsc --noEmit --incremental false > verification-logs/typecheck.log 2>&1 || result=1
           exit "$result"
