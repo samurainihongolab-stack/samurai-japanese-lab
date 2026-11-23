@@ -1,15 +1,20 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
+import { ADMIN_COOKIE, verifyAdminToken } from "@/lib/auth/admin";
+import LogoutButton from "./LogoutButton";
 
 export const metadata: Metadata = {
   title: "侍日本語ラボ | CMS 管理画面",
   description: "問題・承認・配信管理システム",
 };
 
-export default function AdminLayout({
+export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const user = await verifyAdminToken((await cookies()).get(ADMIN_COOKIE)?.value);
+  if (!user) return <>{children}</>; // 未ログイン（= /admin/login のみ到達可能。他は proxy がリダイレクト）
   return (
     <div className="flex h-screen bg-gray-100">
       {/* サイドバー */}
@@ -22,6 +27,8 @@ export default function AdminLayout({
         <nav className="mt-8 space-y-2 px-4">
           <NavItem href="/admin" label="ダッシュボード" icon="📊" />
           <NavItem href="/admin/questions" label="問題管理" icon="📝" />
+          <NavItem href="/admin/quiz" label="SNSクイズ配信" icon="📣" />
+          <NavItem href="/admin/instagram" label="Instagramカルーセル" icon="🖼️" />
           <NavItem href="/admin/approval" label="承認フロー" icon="✅" />
           <NavItem href="/admin/schedule" label="配信スケジュール" icon="📅" />
           <NavItem href="/admin/preview" label="プレビュー" icon="👁️" />
@@ -33,11 +40,9 @@ export default function AdminLayout({
         <div className="absolute bottom-6 left-4 right-4 border-t border-blue-700 pt-4">
           <div className="text-sm">
             <p className="text-gray-300">ログイン中:</p>
-            <p className="font-bold">編集者 A</p>
+            <p className="font-bold break-all">{user?.email ?? "未ログイン"}</p>
           </div>
-          <button className="mt-4 w-full bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-sm font-bold transition">
-            ログアウト
-          </button>
+          <LogoutButton />
         </div>
       </aside>
 

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/db/client";
-import { verifyRequest } from "@/lib/auth/jwt";
+import { legacyUser } from "@/lib/auth/legacy";
 import { generateInstagramPreview } from "@/lib/preview/instagram";
 
 export async function GET(
@@ -8,7 +8,7 @@ export async function GET(
   { params }: { params: Promise<{ questionId: string }> }
 ) {
   try {
-    const user = verifyRequest(request);
+    const user = await legacyUser(request);
     if (!user) return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
 
     const { questionId } = await params;

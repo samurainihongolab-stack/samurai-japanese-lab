@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/db/client";
-import { verifyRequest } from "@/lib/auth/jwt";
+import { legacyUser } from "@/lib/auth/legacy";
 
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const user = verifyRequest(request);
+    const user = await legacyUser(request);
     if (!user) return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
 
     const { id } = await params;
@@ -44,7 +44,7 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const user = verifyRequest(request);
+    const user = await legacyUser(request);
     if (!user) return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
 
     const { id } = await params;
@@ -87,7 +87,7 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const user = verifyRequest(request);
+    const user = await legacyUser(request);
     if (!user) return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
 
     const { id } = await params;

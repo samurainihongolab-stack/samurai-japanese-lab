@@ -29,11 +29,7 @@ export default function AnalyticsPage() {
     try {
       const response = await fetch(
         `/api/analytics/stats?questionId=${questionId}&startDate=${dateRange.start}&endDate=${dateRange.end}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
-          },
-        }
+        { credentials: "same-origin" }
       );
       const data = await response.json();
       if (data.success) {

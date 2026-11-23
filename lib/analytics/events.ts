@@ -32,13 +32,9 @@ export function generateAnonymousUserId(): string {
 
 export async function recordEvent(event: AnalyticsEvent): Promise<boolean> {
   try {
-    const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
     const response = await fetch("/api/analytics/events", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(event),
     });
     return response.ok;

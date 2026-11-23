@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local dry-run data & generated previews
+/.local-data/
+/preview-out/
+/reviews/

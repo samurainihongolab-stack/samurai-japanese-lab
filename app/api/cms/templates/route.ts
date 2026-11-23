@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/db/client";
-import { verifyRequest } from "@/lib/auth/jwt";
+import { legacyUser } from "@/lib/auth/legacy";
 
 export async function GET(request: NextRequest) {
   try {
-    const user = verifyRequest(request);
+    const user = await legacyUser(request);
     if (!user) return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
 
     const { searchParams } = new URL(request.url);
@@ -39,7 +39,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const user = verifyRequest(request);
+    const user = await legacyUser(request);
     if (!user) return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
 
     const body = await request.json();

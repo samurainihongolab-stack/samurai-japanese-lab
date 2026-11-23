@@ -27,11 +27,7 @@ export default function PreviewPage() {
   const fetchPreview = async (platform: "instagram" | "x" | "hp") => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/cms/preview/${platform}/${questionId}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
-        },
-      });
+      const response = await fetch(`/api/cms/preview/${platform}/${questionId}`, { credentials: "same-origin" });
       const data = await response.json();
       if (data.success) {
         setPreviewData((prev) => ({ ...prev, [platform]: data.data }));
