@@ -1,5 +1,7 @@
 import { loadDailyAnswer } from "@/lib/quiz/public-answers";
 
+const optionNumbers: Record<string, string> = { A: "1", B: "2", C: "3", D: "4" };
+
 export default async function DailyAnswer() {
   const calendar = new Intl.DateTimeFormat("ja-JP", { timeZone: "Asia/Tokyo", month: "long", day: "numeric" });
   const now = new Date();
@@ -13,9 +15,13 @@ export default async function DailyAnswer() {
         <p>{today}（日本時間）</p>
         {answer ? (
           <div className="qz-answer">
-            <p className="qz-ans-title">正解：{answer.correct_answer}</p>
+            <p className="qz-ans-title">正解：{optionNumbers[answer.correct_answer] ?? answer.correct_answer}</p>
             <h3>解説</h3>
-            <p style={{ whiteSpace: "pre-line" }}>{answer.explanation}</p>
+            <p style={{ whiteSpace: "pre-line" }}>
+              {answer.explanation.replace(/^(\s*)([A-D])[.．]/gm, (_match: string, indent: string, letter: string) =>
+                `${indent}${optionNumbers[letter]}．`,
+              )}
+            </p>
           </div>
         ) : <p>{ok ? "本日の解答はまだ公開されていません。" : "ただいま解答を表示できません。"}</p>}
       </div>
