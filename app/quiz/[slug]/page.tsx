@@ -41,7 +41,7 @@ export default async function QuizAnswer({ params }: Props) {
         <h1 className="qz-q">正解と解説</h1>
         <div className="qz-answer">
           <p className="qz-ans-title">
-            正解：{q.correct_answer}
+            正解：{({ A: "1", B: "2", C: "3", D: "4" } as Record<string, string>)[q.correct_answer] ?? q.correct_answer}
           </p>
           <h2>解説</h2>
           <p style={{ whiteSpace: "pre-line" }}>{q.explanation}</p>

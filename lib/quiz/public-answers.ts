@@ -19,6 +19,22 @@ const launchQuiz = {
   ].join("\n\n"),
 };
 
+const zpdRelease = Date.parse("2026-11-25T15:20:00+09:00");
+const zpdQuiz = {
+  "slug": "zone-of-proximal-development",
+  "question": "学習者は一人では店員に商品の交換を頼めなかった。教師が話す順番を示すと、自分の言葉で頼めた。\n\nこのように、支援があればできる範囲を何という？",
+  "choices": {
+    "A": "中間言語",
+    "B": "最近接発達領域",
+    "C": "言語転移",
+    "D": "化石化"
+  },
+  "category": "学習支援",
+  "difficulty": "初級",
+  "correct_answer": "B",
+  "explanation": "2．最近接発達領域\n\n判断の決め手は、一人ではできなかったことが、支援を受けるとできた点です。教師が「話す順番」を示したことで、学習者は自分の言葉で商品の交換を頼めました。\n\n1．中間言語は、学習者が習得の途中で作り上げる独自の言語体系です。\n\n3．言語転移は、すでに知っている言語の特徴が、学んでいる言語の理解や使用に影響することです。\n\n4．化石化は、目標言語と異なる言い方などが定着し、学習を続けても変わりにくくなることです。\n\n試験での見分け方\n\n「支援があればできる範囲」は最近接発達領域です。「話す順番を示す」といった支援そのものに注目する場合は、足場かけ（スキャフォールディング）が関係します。"
+} as const;
+
 function quizQuestions() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -31,6 +47,10 @@ function quizQuestions() {
 export async function loadDailyAnswer(now: Date) {
   const japanTime = new Date(now.getTime() + 9 * 60 * 60 * 1000);
   const midnight = new Date(japanTime.toISOString().slice(0, 10) + "T00:00:00+09:00");
+  if (now.getTime() >= zpdRelease && midnight.getTime() <= zpdRelease) {
+    const { correct_answer, explanation } = zpdQuiz;
+    return { ok: true, answer: { correct_answer, explanation } };
+  }
   if (now.getTime() >= scheduledAt && midnight.getTime() <= scheduledAt) {
     const { correct_answer, explanation } = launchQuiz;
     return { ok: true, answer: { correct_answer, explanation } };
@@ -56,6 +76,9 @@ export async function loadDailyAnswer(now: Date) {
 
 export async function loadPublicOne(slug: string) {
   const now = new Date();
+  if (slug === zpdQuiz.slug) {
+    return { ok: true, question: now.getTime() >= zpdRelease ? zpdQuiz : null };
+  }
   if (slug === launchQuiz.slug) {
     return { ok: true, question: now.getTime() >= scheduledAt ? launchQuiz : null };
   }
